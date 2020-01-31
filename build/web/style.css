@@ -1,14 +1,1 @@
-.main {
-    text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-.title {
-    text-align: center;
-}
-
-.header {
-    font-weight: bold;
-    font-size: 18px;
-}
+.map { height: 720px; }

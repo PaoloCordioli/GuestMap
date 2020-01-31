@@ -1,14 +1,8 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         message: []
+         message: [],
       };
    }
 
@@ -16,28 +10,31 @@ class App extends React.Component {
       let obj = await fetch("http://localhost:8080/Map/messages").then(r => r.json());
       this.setState({ message: obj.message })
 
-   }
+      let myMap = L.map('root').setView([41.53, 12.30], 5)
 
-   createTr = (e) => {
-      return <tr><td>{e.content}</td><td>{e.lat}</td><td>{e.lon}</td></tr>
-   }
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+         maxZoom: 18,
+         id: 'mapbox/streets-v11',
+         accessToken: 'pk.eyJ1IjoibGFjYXJwYSIsImEiOiJjazYwcDlsdGowOW85M2Zwa3hvY2pqYTdqIn0.gH_BOcRoYaTB1Y5CHERLpw'
+      }).addTo(myMap);
 
+
+      this.state.message.forEach(mes => {
+         let marker = L.marker([mes.lat, mes.lon]).addTo(myMap)
+         marker.bindPopup(mes.content)
+      })
+
+
+      myMap.on('click',(e) =>{
+         let marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(myMap)
+         marker.bindPopup("ssa").openPopup();
+         });
+   }
 
    render() {
-      let listMessage = this.state.message.map(this.createTr)
       return (
-         <div>
-            <h1 className="title">List of Messages</h1>
-            <div className="main"><table className="table table-sm table-bordered">
-               <thead>
-                  <tr className="header">
-                     <td>Message</td>
-                     <td>Lat</td>
-                     <td>Lon</td>
-                  </tr>
-               </thead>
-               <tbody>{listMessage}</tbody>
-            </table></div>
+         <div className="map">
          </div>
       )
    }
