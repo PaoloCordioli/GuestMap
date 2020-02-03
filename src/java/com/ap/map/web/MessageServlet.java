@@ -39,9 +39,8 @@ public class MessageServlet extends HttpServlet {
             messageDao = MessageDAO.getInstance();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -52,12 +51,11 @@ public class MessageServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-        JSONObject out = new JSONObject();   
+
+        JSONObject out = new JSONObject();
         out.put("message", JSONSerializer.postListToJSON(messageDao.getAll()));
         PrintWriter writer = response.getWriter();
         writer.write(out.toJSONString());
@@ -71,12 +69,23 @@ public class MessageServlet extends HttpServlet {
             String body = req.getReader().lines().collect(Collectors.joining((System.lineSeparator())));
             JSONParser parser = new JSONParser();
             JSONObject parseJson = (JSONObject) parser.parse(body);
-            messageDao.addToDB(new Message(parseJson.get("content").toString(),Double.parseDouble(parseJson.get("lat").toString()),Double.parseDouble(parseJson.get("lon").toString())));
+            messageDao.add(new Message(Integer.parseInt(parseJson.get("id").toString()), parseJson.get("content").toString(), Double.parseDouble(parseJson.get("lat").toString()), Double.parseDouble(parseJson.get("lon").toString())));
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /*@Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String body = req.getReader().lines().collect(Collectors.joining((System.lineSeparator())));
+            JSONParser parser = new JSONParser();
+            JSONObject parseJson = (JSONObject) parser.parse(body);
+            messageDao.delete(Integer.parseInt(parseJson.get("id").toString()));
+    } catch (ParseException | SQLException ex) {
+            Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
 
     @Override
     public String getServletInfo() {

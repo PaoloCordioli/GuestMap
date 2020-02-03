@@ -18,6 +18,7 @@ public class JSONSerializer {
 
     public static JSONObject postToJSON(Message m) {
         JSONObject postJSON = new JSONObject();
+        postJSON.put("id", m.getId());
         postJSON.put("content", m.getContent());
         postJSON.put("lat", m.getLat());
         postJSON.put("lon", m.getLon());

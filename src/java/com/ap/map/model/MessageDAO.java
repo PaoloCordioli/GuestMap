@@ -45,13 +45,20 @@ public class MessageDAO {
         messages = new ArrayList<>();
     }
 
-    public void addToDB(Message m) throws SQLException {
-        CallableStatement st = pdo.prepareCall("INSERT INTO MESSAGE VALUES(?,?,?)");
-        st.setString(1, m.getContent());
-        st.setDouble(2, m.getLat());
-        st.setDouble(3, m.getLon());
+    public void add(Message m) throws SQLException {
+        CallableStatement st = pdo.prepareCall("INSERT INTO MESSAGE VALUES(?,?,?,?)");
+        st.setInt(1, m.getId());
+        st.setString(2, m.getContent());
+        st.setDouble(3, m.getLat());
+        st.setDouble(4, m.getLon());
         st.execute();
     }
+    
+    /*public void delete(int id) throws SQLException {
+        CallableStatement st = pdo.prepareCall("DELETE FROM MESSAGE WHERE ID = ?");
+        st.setInt(1, id);
+        st.executeUpdate();
+    }*/
 
     public List<Message> getAll() {
         List<Message> messagges = new ArrayList<>();
@@ -59,7 +66,7 @@ public class MessageDAO {
             Statement stmt = pdo.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Message");
             while (rs.next()) {
-                messagges.add(new Message(rs.getString("content"), rs.getDouble("lat"), rs.getDouble("lon")));
+                messagges.add(new Message(rs.getInt("id"),rs.getString("content"), rs.getDouble("lat"), rs.getDouble("lon")));
             }
             rs.close();
         } catch (SQLException ex) {

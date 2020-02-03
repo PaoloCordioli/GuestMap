@@ -17,10 +17,11 @@ public class Message {
     private double lon;
 
 
-    public Message(String content, double lat, double lon) {
+    public Message(int id,String content, double lat, double lon) {
         this.content = content;
         this.lat = lat;
         this.lon = lon;
+        this.id = id;
     }
     
     public void setId(int id) {
