@@ -4,23 +4,21 @@ class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         message: []
+         message: "null"
       };
+      this.click = this.click.bind();
    }
 
-   componentDidMount33 = async () => {
-      let obj = await fetch("http://localhost:8080/Map/messages").then(r => r.json());
-      this.setState({ message: obj.message })
-      console.log(this.state.message)
+   UNSAFE_componentWillMount = () => {
+      console.log("prima fetch", this.state.message)
+      fetch("http://localhost:8080/Map/messages").then(r => r.json()).then(m => this.setState({ message: m.message }));
    }
-
    click = (e) => {
       console.log(e.latlng.lat + " " + e.latlng.lng)
    }
 
    render() {
       const position = [45.51, 10.2]
-
       return (
          <div className="map">
             <LeafletMap center={position} zoom={5} onClick={this.click}>
@@ -28,13 +26,8 @@ class App extends React.Component {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                />
-               <Marker position={position}>
-                  <Popup>
-                     <span>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-              </span>
-                  </Popup>
-               </Marker>
+               {console.log("Message", this.state.message)}
+               <Message message={this.state.message} />
             </LeafletMap>
          </div>
       )
