@@ -21,14 +21,14 @@ class App extends React.Component {
       this.setState({ id: this.state.id + 1 })
 
       let newMessage = {
-         id : this.state.id,
-         content : "Spagna" ,
-         lat : e.latlng.lat,
+         id: this.state.id,
+         content: "Random",
+         lat: e.latlng.lat,
          lon: e.latlng.lng
       };
 
       this.setState((prevState) => {
-         return { message : prevState.message.concat(newMessage) };
+         return { message: prevState.message.concat(newMessage) };
       });
 
       fetch("http://localhost:8080/Map/messages", {
@@ -39,6 +39,16 @@ class App extends React.Component {
          },
          body: JSON.stringify(newMessage)
       }).then((res) => res.json())
+   }
+
+   elimina = () => {
+      fetch("http://localhost:8080/Map/messages?id=" +  4, {
+         method: 'DELETE',
+      }).then(() => {
+         console.log('removed');
+      }).catch(err => {
+         console.error(err)
+      });
    }
 
 
@@ -53,6 +63,7 @@ class App extends React.Component {
                />
                <Message message={this.state.message} />
             </LeafletMap>
+            <button onClick={this.elimina}>elimia</button>
          </div>
       )
    }

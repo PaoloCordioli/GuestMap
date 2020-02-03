@@ -75,18 +75,18 @@ public class MessageServlet extends HttpServlet {
         }
     }
 
-    /*@Override
+    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
         try {
-            String body = req.getReader().lines().collect(Collectors.joining((System.lineSeparator())));
-            JSONParser parser = new JSONParser();
-            JSONObject parseJson = (JSONObject) parser.parse(body);
-            messageDao.delete(Integer.parseInt(parseJson.get("id").toString()));
-    } catch (ParseException | SQLException ex) {
+            messageDao.delete(id);
+        } catch (SQLException ex) {
             Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 
+ 
+    
     @Override
     public String getServletInfo() {
         return "Short description";

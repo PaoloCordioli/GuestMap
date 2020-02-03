@@ -54,11 +54,11 @@ public class MessageDAO {
         st.execute();
     }
     
-    /*public void delete(int id) throws SQLException {
+    public void delete(int id) throws SQLException {
         CallableStatement st = pdo.prepareCall("DELETE FROM MESSAGE WHERE ID = ?");
         st.setInt(1, id);
         st.executeUpdate();
-    }*/
+    }
 
     public List<Message> getAll() {
         List<Message> messagges = new ArrayList<>();
