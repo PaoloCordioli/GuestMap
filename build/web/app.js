@@ -22,7 +22,7 @@ class App extends React.Component {
 
       let newMessage = {
          id: this.state.id,
-         content: "Random",
+         content: "",
          lat: e.latlng.lat,
          lon: e.latlng.lng
       };
@@ -41,29 +41,37 @@ class App extends React.Component {
       }).then((res) => res.json())
    }
 
-   elimina = () => {
-      fetch("http://localhost:8080/Map/messages?id=" +  4, {
+   deleteMessage = (id) => {
+      fetch("http://localhost:8080/Map/messages?id=" + id, {
          method: 'DELETE',
-      }).then(() => {
-         console.log('removed');
-      }).catch(err => {
-         console.error(err)
-      });
+      })
+
+      let filtered = this.state.message.filter((mes) => {
+         return (mes.id !== id)
+      })
+
+      this.setState({ message: filtered })
    }
 
 
    render() {
       const position = [45.51, 10.2]
       return (
-         <div className="map">
-            <LeafletMap center={position} zoom={5} onClick={this.createMessage}>
-               <TileLayer
-                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-               />
-               <Message message={this.state.message} />
-            </LeafletMap>
-            <button onClick={this.elimina}>elimia</button>
+         <div className="container">
+            <div className="row">
+               <div className="col-9">
+                  <LeafletMap center={position} zoom={5} onClick={this.createMessage}>
+                     <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                     />
+                     <Message message={this.state.message} delete={this.deleteMessage} />
+                  </LeafletMap>
+               </div>
+               <div className="col-3">
+                  <Form />
+               </div>
+            </div>
          </div>
       )
    }

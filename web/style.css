@@ -4,6 +4,5 @@ body {
 
 .leaflet-container {
     height: 650px;
-    width: 90%;
-    margin: 0 auto;
+    margin-left: -20%;
 }
