@@ -3,6 +3,37 @@ body {
 }
 
 .leaflet-container {
-    height: 650px;
-    margin-left: -20%;
+    height: 570px;
+}
+
+.form {
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.input {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid black;
+    width: 200px;
+    border-radius: 5px;
+    margin-left: -8px;
+  }
+    
+.button {
+    border-color: black;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.text{
+    text-align: left;
 }
