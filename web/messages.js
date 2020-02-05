@@ -7,8 +7,8 @@ class Message extends React.Component {
     }
 
     createMarker = (mes) => { // funzione che permette di creare un marker con un messaggio per ogni messaggio nello state
-        return <Marker key={mes.id} position={[mes.lat, mes.lon]}><Popup><span>{mes.content} <span></span>
-            <button type="button" className="border border-light" onClick={()=> this.delete(mes.id)} > <img src='./icons/trash.svg' alt="" width="20" height="20"></img>
+        return <Marker key={mes.id} position={[mes.lat, mes.lon]}><Popup><span>{mes.content}</span><span>
+            <button type="button" className=" delete border border-light " onClick={()=> this.delete(mes.id)} > <img src='./icons/trash.svg' alt="" width="20" height="20"></img>
             </button></span></Popup></Marker>
     }
 

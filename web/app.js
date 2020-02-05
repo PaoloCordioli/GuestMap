@@ -37,18 +37,13 @@ class App extends React.Component {
             body: JSON.stringify(newMessage)
          }).then((res) => res.json())
 
-         e.preventDefault()
-
-         this.LonElement.value = ""
-         this.LatElement.value = ""
-         this.messageElement.value = ""
-
          this.setState({ id: this.state.id + 1 })
 
          this.setState((prevState) => { // aggiunto il messaggio allo state
             return { message: prevState.message.concat(newMessage) };
          });
       }
+      //pulizia dei campi di inserimento
       this.LonElement.value = ""
       this.LatElement.value = ""
       this.messageElement.value = ""
@@ -88,22 +83,22 @@ class App extends React.Component {
                         <Message message={this.state.message} delete={this.deleteMessage} />
                      </LeafletMap>
                   </div>
-                  <div className="col-3 form">
-                     <h5>Add new message into the Map</h5>
-                     <p className="text">Before you must select a point on the map where you want to create the message</p>
-                     <form onSubmit={this.createMessage}>
-                        <input className="input" ref={(obj) => this.LonElement = obj} type="text" placeholder="Latitude" disabled></input>
-                        <input className="input" ref={(obj) => this.LatElement = obj} type="text" placeholder="Longitude" disabled></input>
-                        <input className="input" ref={(obj) => this.messageElement = obj} type="text" placeholder="Add a new message..."></input>
-                        <br></br>
-                        <button className="button" type="submit">Add</button>
-                     </form>
+                     <div className="col-3 form">
+                        <h5>Add new message into the Map</h5>
+                        <p className="text">Before you must select a point on the map where you want to create the message</p>
+                        <form onSubmit={this.createMessage}>
+                           <input className="input" ref={(obj) => this.LonElement = obj} type="text" placeholder="Latitude" disabled></input>
+                           <input className="input" ref={(obj) => this.LatElement = obj} type="text" placeholder="Longitude" disabled></input>
+                           <input className="input" ref={(obj) => this.messageElement = obj} type="text" placeholder="Add a new message..."></input>
+                           <br></br>
+                           <button className="button" type="submit">Add</button>
+                        </form>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-      )
-   }
-}
-
-
+            )
+         }
+      }
+      
+      

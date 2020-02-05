@@ -37,3 +37,10 @@ h1{
 .text{
     text-align: left;
 }
+
+.delete {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
