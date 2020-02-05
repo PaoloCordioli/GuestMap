@@ -84,9 +84,7 @@ public class MessageServlet extends HttpServlet {
             Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
- 
-    
+  
     @Override
     public String getServletInfo() {
         return "Short description";
