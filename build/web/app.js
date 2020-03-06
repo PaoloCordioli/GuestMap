@@ -83,22 +83,22 @@ class App extends React.Component {
                         <Message message={this.state.message} delete={this.deleteMessage} />
                      </LeafletMap>
                   </div>
-                     <div className="col-3 form">
-                        <h5>Add new message into the Map</h5>
-                        <p className="text">Before you must select a point on the map where you want to create the message</p>
-                        <form onSubmit={this.createMessage}>
-                           <input className="input" ref={(obj) => this.LonElement = obj} type="text" placeholder="Latitude" disabled></input>
-                           <input className="input" ref={(obj) => this.LatElement = obj} type="text" placeholder="Longitude" disabled></input>
-                           <input className="input" ref={(obj) => this.messageElement = obj} type="text" placeholder="Add a new message..."></input>
-                           <br></br>
-                           <button className="button" type="submit">Add</button>
-                        </form>
-                     </div>
+                  <div className="col-3 form">
+                     <h5>Add new message into the Map</h5>
+                     <p className="text">Before you must select a point on the map where you want to create the message</p>
+                     <form onSubmit={this.createMessage}>
+                        <input className="input" ref={(obj) => this.LonElement = obj} type="text" placeholder="Latitude" disabled></input>
+                        <input className="input" ref={(obj) => this.LatElement = obj} type="text" placeholder="Longitude" disabled></input>
+                        <input className="input" ref={(obj) => this.messageElement = obj} type="text" placeholder="Add a new message..."></input>
+                        <br></br>
+                        <button className="button" type="submit">Add</button>
+                     </form>
                   </div>
                </div>
             </div>
-            )
-         }
-      }
-      
-      
+         </div>
+      )
+   }
+}
+
+
